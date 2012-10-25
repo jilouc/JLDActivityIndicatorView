@@ -87,6 +87,9 @@
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_5_0
 - (void)setActivityTintColor:(UIColor *)tintColor {
+    if (![_loadingIndicator respondsToSelector:@selector(setColor:)]) {
+        return;
+    }
     [self.loadingIndicator setColor:tintColor];
 }
 #endif

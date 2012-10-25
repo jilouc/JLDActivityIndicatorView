@@ -35,10 +35,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    [[JLDActivityIndicatorView appearance] setTintColor:[UIColor blackColor]];
-    [[JLDActivityIndicatorView appearance] setShadowTintColor:[UIColor blackColor]];
-    [[JLDActivityIndicatorView appearance] setActivityTintColor:[UIColor whiteColor]];
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_5_0
+    if (NSProtocolFromString(@"UIAppearance")) {
+        [[JLDActivityIndicatorView appearance] setTintColor:[UIColor blackColor]];
+        [[JLDActivityIndicatorView appearance] setShadowTintColor:[UIColor blackColor]];
+        [[JLDActivityIndicatorView appearance] setActivityTintColor:[UIColor whiteColor]];
+    }
+#endif
     
     self.viewController = [[JLDViewController alloc] initWithNibName:@"JLDViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
